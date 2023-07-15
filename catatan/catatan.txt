@@ -2,3 +2,12 @@
 2. php artisan migrate
 3. php artisan serve
 4. php artisan make:model Product -m(migration)
+5. php artisan make:model Order -m
+6. php artisan make:model Country -m
+7. php artisan make:model CartItem -m
+8. php artisan make:model OrderDetail -m
+9. php artisan make:model OrderItem -m
+10. php artisan make:model Payment -m
+11. php artisan make:model Customer -m
+12. php artisan make:model CustomerAddress -m
+13. php artisan migrate
