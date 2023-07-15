@@ -21,3 +21,5 @@
 16. // ganti port di package.json -> script "vue" -> "vue --port=3000"
 17. npm install -D tailwindcss postcss autoprefixer
 18. npx tailwindcss init -p
+19. npm install -s vuex@next
+20. npm install -S vue-router@next
