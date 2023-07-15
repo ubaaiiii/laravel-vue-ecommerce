@@ -1,0 +1,4 @@
+1. laravel new laravel-vue-ecommerce
+2. php artisan migrate
+3. php artisan serve
+4. php artisan make:model Product -m(migration)
