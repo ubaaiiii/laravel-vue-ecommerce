@@ -11,3 +11,13 @@
 11. php artisan make:model Customer -m
 12. php artisan make:model CustomerAddress -m
 13. php artisan migrate
+14. npm create vite@latest
+    backend
+    Vue
+    Javascript
+15. cd backend
+    npm install
+    npm run dev
+16. // ganti port di package.json -> script "vue" -> "vue --port=3000"
+17. npm install -D tailwindcss postcss autoprefixer
+18. npx tailwindcss init -p
