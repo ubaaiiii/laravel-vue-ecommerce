@@ -1,16 +1,15 @@
 <script setup>
-import { ref, computed } from "vue";
-import store from "../store";
+import { ref, computed } from 'vue'
+import store from '../store'
 
-const test = computed(() => store.state.test);
+const test = computed(() => store.state.test)
 
-defineProps({
-  msg: String,
-});
-
-const count = ref(0);
 </script>
 
 <template>
-  {{ test }}
+    {{ test }}
 </template>
+
+<style scoped>
+
+</style>
