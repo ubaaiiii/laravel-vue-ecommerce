@@ -92,7 +92,7 @@
 
 <script setup>
 import { onMounted } from "vue";
-import GuestLayout from "../../components/GuestLayout.vue";
+import GuestLayout from "@/components/layouts/GuestLayout.vue";
 
 const initValidationSignUp = () => {
   Codebase.helpers("jq-validation");

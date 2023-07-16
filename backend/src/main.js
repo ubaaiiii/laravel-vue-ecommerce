@@ -8,5 +8,5 @@ import router from './router'
 createApp(App)
   .use(store)
   .use(router)
-  .mount('#app')
+  .mount('#page-container')
 

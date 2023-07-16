@@ -1,22 +1,22 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 // Components
-import AppLayout from "../components/AppLayout.vue";
+import AppLayout from "@/components/layouts/AppLayout.vue";
 
 // Views/App
-import Dashboard from "../views/app/Dashboard.vue";
-import Products from "../views/app/Products.vue";
+import Dashboard from "@/views/app/Dashboard.vue";
+import Products from "@/views/app/Products.vue";
 
 // Views/Auth
-import Login from "../views/auth/Login.vue";
-import PasswordForgot from "../views/auth/PasswordForgot.vue";
-import PasswordReset from "../views/auth/PasswordReset.vue";
-import Register from "../views/auth/Register.vue";
+import Login from "@/views/auth/Login.vue";
+import PasswordForgot from "@/views/auth/PasswordForgot.vue";
+import PasswordReset from "@/views/auth/PasswordReset.vue";
+import Register from "@/views/auth/Register.vue";
 
 // Views/Errors
-import NotFound from "../views/errors/NotFound.vue";
+import NotFound from "@/views/errors/NotFound.vue";
 
-import store from "../store";
+import store from "@/store";
 
 const routes = [
   {
@@ -28,12 +28,12 @@ const routes = [
     },
     children: [
       {
-        path: '/dashboard',
+        path: 'dashboard',
         name: 'app.dashboard',
         component: Dashboard,
       },
       {
-        path: '/products',
+        path: 'products',
         name: 'app.products',
         component: Products,
       },
@@ -44,7 +44,7 @@ const routes = [
     name: 'login',
     component: Login,
     meta: {
-      reqiureGuest: true
+      requiresGuest: true
     }
   },
   {
@@ -52,7 +52,7 @@ const routes = [
     name: 'register',
     component: Register,
     meta: {
-      reqiureGuest: true
+      requiresGuest: true
     }
   },
   {
@@ -60,7 +60,7 @@ const routes = [
     name: 'forgot-password',
     component: PasswordForgot,
     meta: {
-      reqiureGuest: true
+      requiresGuest: true
     }
   },
   {
@@ -68,17 +68,9 @@ const routes = [
     name: 'reset-password',
     component: PasswordReset,
     meta: {
-      reqiureGuest: true
+      requiresGuest: true
     }
-  },
-  {
-    path: '/:pathmatch(.*)',
-    name: 'notfound',
-    component: NotFound,
-    meta: {
-      reqiureGuest: true
-    }
-  },
+  }
 ]
 
 const router = createRouter({
@@ -87,16 +79,20 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.reqiureAuth && !store.state.user.token) {
-    return next({
+  if (to.meta.requiresAuth && !store.state.user.token) {
+    next({
       name: 'login'
     })
-  } else if (to.meta.reqiureGuest && store.state.user.token) {
-    return next({
+  } else if (to.meta.requiresGuest && store.state.user.token) {
+    next({
       name: 'app.dashboard'
     })
+  } else if (!router.hasRoute(to.name)) {
+    next({
+      name: 'login'
+    })
   } else {
-    return next()
+    next()
   }
 })
 

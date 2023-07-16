@@ -44,6 +44,7 @@ const { title, subtitle } = defineProps({
   title: String,
   subtitle: String,
 });
+const laravelUrl = "{{ url('/') }}"; // Menyisipkan URL Laravel dari Blade template ke dalam variabel
 </script>
 
 <style>
