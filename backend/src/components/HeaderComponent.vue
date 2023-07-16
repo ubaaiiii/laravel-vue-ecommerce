@@ -199,13 +199,13 @@
               <!-- END Side Overlay -->
 
               <div class="dropdown-divider"></div>
-              <a
+              <button
                 class="dropdown-item d-flex align-items-center justify-content-between space-x-1"
-                href="op_auth_signin.html"
+                @click="logout"
               >
                 <span>Sign Out</span>
                 <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -377,7 +377,24 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+import store from "../store";
+import router from "../router";
 
+let loading = ref(false);
+let error = ref(null);
+
+function logout() {
+  loading.value = true;
+  store.dispatch("logout").then(() => {
+    loading.value = false;
+    router.replace({ name: 'login' });
+  }).catch((response) => {
+    loading.value = false;
+    error.value = response;
+    console.log(response);
+  });
+}
 </script>
 
 <style>

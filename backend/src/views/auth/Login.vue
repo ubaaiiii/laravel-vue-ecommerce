@@ -4,80 +4,90 @@
     subtitle="It’s a great day today!"
     @submit="login"
   >
-
-      <div class="block block-themed block-rounded block-fx-shadow">
-        <div class="block-header bg-gd-dusk">
-          <h3 class="block-title">Please Sign In</h3>
+    <div class="block block-themed block-rounded block-fx-shadow">
+      <div class="block-header bg-gd-dusk">
+        <h3 class="block-title">Please Sign In</h3>
+      </div>
+      <div class="block-content">
+        <div class="form-floating mb-4">
+          <input
+            type="text"
+            class="form-control"
+            id="login-email"
+            name="login-email"
+            placeholder="Enter your email"
+            v-model="user.email"
+          />
+          <label class="form-label" for="login-email">Email</label>
         </div>
-        <div class="block-content">
-          <div class="form-floating mb-4">
-            <input
-              type="text"
-              class="form-control"
-              id="login-username"
-              name="login-username"
-              placeholder="Enter your username"
-            />
-            <label class="form-label" for="login-username">Username</label>
-          </div>
-          <div class="form-floating mb-4">
-            <input
-              type="password"
-              class="form-control"
-              id="login-password"
-              name="login-password"
-              placeholder="Enter your password"
-            />
-            <label class="form-label" for="login-password">Password</label>
-          </div>
-          <div class="row">
-            <div class="col-sm-6 d-sm-flex align-items-center push">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="login-remember-me"
-                  name="login-remember-me"
-                />
-                <label class="form-check-label" for="login-remember-me"
-                  >Remember Me</label
-                >
-              </div>
-            </div>
-            <div class="col-sm-6 text-sm-end push">
-              <button
-                type="submit"
-                class="btn btn-lg btn-alt-primary fw-medium"
+        <div class="form-floating mb-4">
+          <input
+            type="password"
+            class="form-control"
+            id="login-password"
+            name="login-password"
+            placeholder="Enter your password"
+            v-model="user.password"
+          />
+          <label class="form-label" for="login-password">Password</label>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 d-sm-flex align-items-center push">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="login-remember-me"
+                name="login-remember-me"
+                v-model="user.remember_me"
+              />
+              <label class="form-check-label" for="login-remember-me"
+                >Remember Me</label
               >
-                Sign In
-              </button>
             </div>
           </div>
-        </div>
-        <div
-          class="block-content block-content-full bg-body-light text-center d-flex justify-content-between"
-        >
-          <router-link
-            class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
-            to="/register"
-          >
-            <i class="fa fa-plus opacity-50 me-1"></i> Create Account
-          </router-link>
-          <router-link
-            class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
-            to="/forgot-password"
-          >
-            Forgot Password
-          </router-link>
+          <div class="col-sm-6 text-sm-end push">
+            <button type="submit" class="btn btn-lg btn-alt-primary fw-medium">
+              Sign In
+            </button>
+          </div>
         </div>
       </div>
+      <div
+        class="block-content block-content-full bg-body-light text-center d-flex justify-content-between"
+      >
+        <router-link
+          class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
+          to="/register"
+        >
+          <i class="fa fa-plus opacity-50 me-1"></i> Create Account
+        </router-link>
+        <router-link
+          class="fs-sm fw-medium link-fx text-muted me-2 mb-1 d-inline-block"
+          to="/forgot-password"
+        >
+          Forgot Password
+        </router-link>
+      </div>
+    </div>
   </GuestLayout>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import GuestLayout from "@/components/layouts/GuestLayout.vue";
+import store from "../../store";
+import router from "../../router";
+
+let loading = ref(false);
+let error = ref(null);
+
+const user = {
+  email: "",
+  password: "",
+  remember_me: false,
+};
 
 function initValidationSignIn() {
   Codebase.helpers("jq-validation");
@@ -105,8 +115,18 @@ function initValidationSignIn() {
   });
 }
 
-function login(){
-  console.log("login");
+function login() {
+  loading.value = true;
+  console.log('login');
+  store.dispatch("login", user).then(() => {
+    loading.value = false;
+    window.location.href = "/app/dashboard";
+    console.log('login success');
+  }).catch((response) => {
+    loading.value = false;
+    error.value = response.data.message;
+    console.log(response.data.message);
+  });
 }
 
 onMounted(() => {

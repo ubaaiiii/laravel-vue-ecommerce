@@ -23,3 +23,4 @@
 18. npx tailwindcss init -p
 19. npm install -s vuex@next
 20. npm install -S vue-router@next
+21. npm install axios

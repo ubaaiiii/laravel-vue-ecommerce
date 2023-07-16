@@ -34,6 +34,4 @@
 import SidebarComponent from "@/components/SidebarComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
-
-const laravelUrl = "{{ url('/') }}"; // Menyisipkan URL Laravel dari Blade template ke dalam variabel
 </script>
