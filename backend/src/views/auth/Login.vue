@@ -75,13 +75,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
 import GuestLayout from "@/components/layouts/GuestLayout.vue";
 import store from "../../store";
 import router from "../../router";
 
 let loading = ref(false);
 let error = ref(null);
+let appBaseUrl = inject("appBaseUrl");
 
 const user = {
   email: "",
@@ -117,16 +118,18 @@ function initValidationSignIn() {
 
 function login() {
   loading.value = true;
-  console.log('login');
-  store.dispatch("login", user).then(() => {
-    loading.value = false;
-    window.location.href = "/app/dashboard";
-    console.log('login success');
-  }).catch((response) => {
-    loading.value = false;
-    error.value = response.data.message;
-    console.log(response.data.message);
-  });
+  console.log("login");
+  store
+    .dispatch("login", user)
+    .then(() => {
+      loading.value = false;
+      window.location.href = appBaseUrl+"/app/dashboard";
+      console.log("login success");
+    })
+    .catch((error) => {
+      loading.value = false;
+      console.log(error);
+    });
 }
 
 onMounted(() => {

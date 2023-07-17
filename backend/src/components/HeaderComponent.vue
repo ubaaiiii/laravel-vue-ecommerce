@@ -377,18 +377,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
 import store from "../store";
 import router from "../router";
 
 let loading = ref(false);
 let error = ref(null);
+let appBaseUrl = inject("appBaseUrl");
 
 function logout() {
   loading.value = true;
   store.dispatch("logout").then(() => {
     loading.value = false;
-    router.replace({ name: 'login' });
+    window.location.href = appBaseUrl+"/login";
   }).catch((response) => {
     loading.value = false;
     error.value = response;

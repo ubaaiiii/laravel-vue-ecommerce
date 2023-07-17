@@ -1,6 +1,5 @@
 import axios from 'axios';
 import store from './store';
-import Template from './modules/template';
 
 const axiosClient = axios.create();
 
@@ -19,7 +18,6 @@ axiosClient.interceptors.response.use(response => {
     store.commit('setToken', null);
   }
   return error.response;
-}
-);
+});
 
 export default axiosClient;
