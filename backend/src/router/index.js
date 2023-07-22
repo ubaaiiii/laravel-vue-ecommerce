@@ -5,7 +5,7 @@ import AppLayout from "@/components/layouts/AppLayout.vue";
 
 // Views/App
 import Dashboard from "@/views/app/Dashboard.vue";
-import Products from "@/views/app/Products.vue";
+import Products from "@/views/app/Products/Products.vue";
 
 // Views/Auth
 import Login from "@/views/auth/Login.vue";
@@ -34,7 +34,7 @@ const routes = [
       },
       {
         path: 'products',
-        name: 'app.products',
+        name: 'app.products.products',
         component: Products,
       },
     ]

@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    id="page-container"
+    class="remember-theme sidebar-o enable-page-overlay side-scroll page-header-modern"
+  >
     <!-- Sidebar -->
     <!--
         Helper classes

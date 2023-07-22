@@ -117,17 +117,17 @@ function initValidationSignIn() {
 }
 
 function login() {
-  loading.value = true;
+  Codebase.loader('show')
   console.log("login");
   store
     .dispatch("login", user)
     .then(() => {
-      loading.value = false;
+      Codebase.loader('hide')
       window.location.href = appBaseUrl+"/app/dashboard";
       console.log("login success");
     })
     .catch((error) => {
-      loading.value = false;
+      Codebase.loader('hide')
       console.log(error);
     });
 }

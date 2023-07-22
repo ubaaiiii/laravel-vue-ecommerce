@@ -10,14 +10,17 @@ axiosClient.interceptors.request.use(config => {
   return config;
 });
 
-axiosClient.interceptors.response.use(response => {
-  return response;
-}, error => {
-  if (error.response.status === 401) {
-    store.commit('setUser', null);
-    store.commit('setToken', null);
+axiosClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    // if (error.response.status === 401) {
+    //   store.commit('setUser', null);
+    //   store.commit('setToken', null);
+    // }
+    return error;
   }
-  return error.response;
-});
+);
 
 export default axiosClient;

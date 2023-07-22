@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class AuthController extends Controller
     $remember = $credentials['remember_me'] ?? false;
     unset($credentials['remember_me']);
     if (!Auth::attempt($credentials, $remember)) {
-      return response()->json([
+      return response([
         'message' => 'Invalid credentials',
       ], 401);
     }
@@ -27,22 +28,37 @@ class AuthController extends Controller
     $user = Auth::user();
     if (!$user->is_admin) {
       Auth::logout();
-      return response()->json([
+      return response([
         'message' => 'You don\'t have permission to access this page',
       ], 401);
     }
     $token = $user->createToken('main')->plainTextToken;
-    return response()->json([
+    return response([
       'user' => new UserResource($user),
       'token' => $token,
     ]);
+  }
+
+  public function register(Request $request)
+  {
+    $credentials = $request->validate([
+      'name' => ['required', 'string', 'max:255'],
+      'email' => ['required', 'email', 'unique:users'],
+      'password' => ['required', 'confirmed'],
+    ]);
+    $user = User::create($credentials);
+    $token = $user->createToken('main')->plainTextToken;
+    return response([
+      'user' => new UserResource($user),
+      'token' => $token,
+    ], 201);
   }
 
   public function logout()
   {
     $user = Auth::user();
     $user->currentAccessToken()->delete();
-    return response()->json([
+    return response([
       'message' => 'Logged out',
     ], 204);
   }

@@ -169,7 +169,7 @@
                 <span>Profile</span>
                 <i class="fa fa-fw fa-user opacity-25"></i>
               </a>
-              <a
+              <!-- <a
                 class="dropdown-item d-flex align-items-center justify-content-between"
                 href="be_pages_generic_inbox.html"
               >
@@ -182,12 +182,12 @@
               >
                 <span>Invoices</span>
                 <i class="fa fa-fw fa-file opacity-25"></i>
-              </a>
-              <div class="dropdown-divider"></div>
+              </a> -->
+              <!-- <div class="dropdown-divider"></div> -->
 
               <!-- Toggle Side Overlay -->
               <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-              <a
+              <!-- <a
                 class="dropdown-item d-flex align-items-center justify-content-between space-x-1"
                 href="javascript:void(0)"
                 data-toggle="layout"
@@ -195,10 +195,10 @@
               >
                 <span>Settings</span>
                 <i class="fa fa-fw fa-wrench opacity-25"></i>
-              </a>
+              </a> -->
               <!-- END Side Overlay -->
 
-              <div class="dropdown-divider"></div>
+              <!-- <div class="dropdown-divider"></div> -->
               <button
                 class="dropdown-item d-flex align-items-center justify-content-between space-x-1"
                 @click="logout"
@@ -368,7 +368,7 @@
     <div id="page-header-loader" class="overlay-header bg-primary">
       <div class="content-header">
         <div class="w-100 text-center">
-          <i class="far fa-refresh fa-spin text-white"></i>
+          <i class="fa fa-cog fa-spin text-white"></i>
         </div>
       </div>
     </div>

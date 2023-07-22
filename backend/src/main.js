@@ -13,5 +13,5 @@ createApp(App)
   .use(router)
   .provide('apiBaseUrl', apiBaseUrl)
   .provide('appBaseUrl', appBaseUrl)
-  .mount('#page-container')
+  .mount('#app')
 

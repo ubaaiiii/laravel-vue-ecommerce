@@ -13,11 +13,12 @@
           <input
             type="text"
             class="form-control"
-            id="signup-username"
-            name="signup-username"
-            placeholder="Enter your username"
+            id="signup-name"
+            name="signup-name"
+            placeholder="Enter your name"
+            v-model="user.name"
           />
-          <label class="form-label" for="signup-username">Username</label>
+          <label class="form-label" for="signup-name">Name</label>
         </div>
         <div class="form-floating mb-4">
           <input
@@ -26,6 +27,7 @@
             id="signup-email"
             name="signup-email"
             placeholder="Enter your email"
+            v-model="user.email"
           />
           <label class="form-label" for="signup-email">Email</label>
         </div>
@@ -36,6 +38,7 @@
             id="signup-password"
             name="signup-password"
             placeholder="Enter your password"
+            v-model="user.password"
           />
           <label class="form-label" for="signup-password">Password</label>
         </div>
@@ -46,6 +49,7 @@
             id="signup-password-confirm"
             name="signup-password-confirm"
             placeholder="Confirm password"
+            v-model="user.password_confirmation"
           />
           <label class="form-label" for="signup-password-confirm"
             >Confirm Password</label
@@ -91,8 +95,20 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted, inject } from "vue";
 import GuestLayout from "@/components/layouts/GuestLayout.vue";
+import store from "../../store";
+
+let loading = ref(false);
+let error = ref(null);
+let appBaseUrl = inject("appBaseUrl");
+
+const user = {
+  name: "",
+  email: "",
+  password: "",
+  password_confirmation: "",
+};
 
 const initValidationSignUp = () => {
   Codebase.helpers("jq-validation");
@@ -136,10 +152,22 @@ const initValidationSignUp = () => {
       "signup-terms": "You must agree to the service terms!",
     },
   });
-};
+}
 
-function register(){
+function register() {
+  Codebase.loader('show')
   console.log("register");
+  store
+    .dispatch("register", user)
+    .then(() => {
+      Codebase.loader('hide')
+      window.location.href = appBaseUrl+"/app/dashboard";
+      console.log("register success");
+    })
+    .catch((error) => {
+      Codebase.loader('hide')
+      console.log(error);
+    });
 }
 
 onMounted(() => {
