@@ -151,7 +151,7 @@
             aria-expanded="false"
           >
             <i class="fa fa-user d-sm-none"></i>
-            <span class="d-none d-sm-inline-block fw-semibold">J. Smith</span>
+            <span class="d-none d-sm-inline-block fw-semibold">{{ user.name }}</span>
             <i class="fa fa-angle-down opacity-50 ms-1"></i>
           </button>
           <div
@@ -159,7 +159,7 @@
             aria-labelledby="page-header-user-dropdown"
           >
             <div class="px-2 py-3 bg-body-light rounded-top">
-              <h5 class="h6 text-center mb-0">John Smith</h5>
+              <h5 class="h6 text-center mb-0">{{ user.name }}</h5>
             </div>
             <div class="p-2">
               <a
@@ -378,8 +378,10 @@
 
 <script setup>
 import { ref, onMounted, inject } from "vue";
-import store from "../store";
-import router from "../router";
+import store from "@/store";
+import router from "@/router";
+
+const user = JSON.parse(sessionStorage.getItem("USER"));
 
 let loading = ref(false);
 let error = ref(null);

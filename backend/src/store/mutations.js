@@ -1,5 +1,6 @@
 export function setUser(state, user) {
   state.user.data = user;
+  sessionStorage.setItem("USER", JSON.stringify(user));
 }
 
 export function setToken(state, token) {
@@ -9,4 +10,12 @@ export function setToken(state, token) {
   } else {
     sessionStorage.removeItem("TOKEN");
   }
+}
+
+export function setProducts(state, products) {
+  state.products = products;
+}
+
+export function setProduct(state, product) {
+  state.product = product;
 }

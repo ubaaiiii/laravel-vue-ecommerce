@@ -16,8 +16,8 @@
             <span class="smini-hidden">
               <!-- <i class="fa fa-fire text-primary"></i> -->
               <img
-              class="w-25"
-              src="@/assets/media/favicons/favicon-192x192.png"
+              class="mb-1" width="20%"
+              src="@/assets/media/favicons/favicon.png"
               alt=""
               />
               <span class="fs-4 text-dual"> SIAP</span
@@ -71,7 +71,7 @@
             <ul class="list-inline mt-3 mb-0">
               <li class="list-inline-item">
                 <div class="link-fx text-dual fs-sm fw-semibold text-uppercase">
-                  J. Smith
+                  {{ user.name  }}
                 </div>
               </li>
               <li class="list-inline-item">
@@ -139,6 +139,11 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import store from "@/store/index.js";
+
+const user = JSON.parse(sessionStorage.getItem('USER'));
 </script>
 
 <style>
