@@ -122,8 +122,24 @@
           </form>
           <!-- END Search -->
         </div>
-        <ProductsTable />
-        <ProductsModal v-model="showProductModal" :product="productModel" @close="onModalClose" />
+        <!-- <ProductsTable /> -->
+        <vue-good-table
+          :columns="columns"
+          :rows="rows"
+          mode="remote"
+          :pagination-options="{
+            enabled: true,
+          }"
+        >
+          <div slot="emptystate">
+            This will show up when there are no rows
+          </div></vue-good-table
+        >
+        <ProductsModal
+          v-model="showProductModal"
+          :product="productModel"
+          @close="onModalClose"
+        />
       </div>
       <!-- END Products -->
     </div>
@@ -135,20 +151,60 @@
 import { onMounted, ref } from "vue";
 import ProductsTable from "./ProductsTable.vue";
 import ProductsModal from "./ProductsModal.vue";
+import { VueGoodTable } from "vue-good-table-next";
 
-const DEFAULT_PRODUCT = {
-  id: '',
-  title: '',
-  description: '',
-  price: '',
-  quantity: '',
-  image: '',
-  category: '',
-  status: '',
-  created_at: '',
-  updated_at: '',
-}
+const columns = [
+  {
+    label: "Id",
+    field: "id",
+  },
+  {
+    label: "Title",
+    field: "title",
+  },
+  {
+    label: "Image",
+    field: "image_url",
+  },
+  {
+    label: "Price",
+    field: "price",
+  },
+  {
+    label: "Updated On",
+    field: "updated_at",
+    type: "date",
+    dateInputFormat: "yyyy-mm-dd hh:mm:ss",
+    dateOutputFormat: "D MMM YYYY",
+  },
+  {
+    label: "Actions",
+    field: "actions",
+    sortable: false,
+  },
+];
 
+const rows = ref([
+  // { id: 1, name: 'John', age: 20, createdAt: '2011-10-31', score: 0.03343 },
+  // { id: 2, name: 'Jane', age: 24, createdAt: '2011-10-31', score: 0.03343 },
+  // { id: 3, name: 'Susan', age: 16, createdAt: '2011-10-30', score: 0.03343 },
+  // { id: 4, name: 'Chris', age: 55, createdAt: '2011-10-11', score: 0.03343 },
+  // { id: 5, name: 'Dan', age: 40, createdAt: '2011-10-21', score: 0.03343 },
+  // { id: 6, name: 'John', age: 20, createdAt: '2011-10-31', score: 0.03343 },
+]);
+
+// const DEFAULT_PRODUCT = {
+//   id: '',
+//   title: '',
+//   description: '',
+//   price: '',
+//   quantity: '',
+//   image: '',
+//   category: '',
+//   status: '',
+//   created_at: '',
+//   updated_at: '',
+// }
 </script>
 
 <style scoped>
