@@ -6,7 +6,9 @@
       <div
         class="content-heading d-flex justify-content-between align-items-center"
       >
-        <span> Products <small>({{ total_products }})</small> </span>
+        <span>
+          Products <small>({{ total_products }})</small>
+        </span>
         <div class="space-x-1">
           <!-- <div class="dropdown d-inline-block">
             <button
@@ -89,7 +91,40 @@
           </div> -->
         </div>
       </div>
-      <ProductsTable />
+      <div class="block block-rounded">
+        <div class="block-content bg-body-light">
+          <!-- Search -->
+          <form
+            action="be_pages_ecom_products.html"
+            method="POST"
+            onsubmit="return false;"
+          >
+            <div class="mb-4">
+              <div class="input-group">
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal-tabs-alternative"
+                >
+                  <i class="fa fa-plus opacity-50"></i> New
+                </button>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search products.."
+                />
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <!-- END Search -->
+        </div>
+        <ProductsTable />
+        <ProductsModal v-model="showProductModal" :product="productModel" @close="onModalClose" />
+      </div>
       <!-- END Products -->
     </div>
     <!-- END Page Content -->
@@ -99,21 +134,22 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import ProductsTable from "./ProductsTable.vue";
+import ProductsModal from "./ProductsModal.vue";
 
-const bgElement = ref(null);
+const DEFAULT_PRODUCT = {
+  id: '',
+  title: '',
+  description: '',
+  price: '',
+  quantity: '',
+  image: '',
+  category: '',
+  status: '',
+  created_at: '',
+  updated_at: '',
+}
 
-// Fungsi untuk mengganti background-image
-// const changeBackgroundImage = () => {
-//   const imageUrl = "@/assets/media/photos/photo26@2x.jpg";
-//   bgElement.value.style.backgroundImage = `url(${imageUrl})`;
-// };
-
-// Panggil fungsi pada mounted atau lifecycle hook yang sesuai
-// onMounted(changeBackgroundImage);
 </script>
 
 <style scoped>
-.bg-image {
-  background-image: url("src/assets/media/photos/photo26@2x.jpg");
-}
 </style>

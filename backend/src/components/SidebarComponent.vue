@@ -7,16 +7,21 @@
         <!-- Logo -->
         <div>
           <span class="smini-visible fw-bold tracking-wide fs-lg">
-            c<span class="text-primary">b</span>
+            S<span class="text-primary">3</span>
           </span>
           <a
             class="link-fx fw-bold tracking-wide mx-auto"
             href="javascript:void(0)"
           >
             <span class="smini-hidden">
-              <i class="fa fa-fire text-primary"></i>
-              <span class="fs-4 text-dual">code</span
-              ><span class="fs-4 text-primary">base</span>
+              <!-- <i class="fa fa-fire text-primary"></i> -->
+              <img
+              class="w-25"
+              src="@/assets/media/favicons/favicon-192x192.png"
+              alt=""
+              />
+              <span class="fs-4 text-dual"> SIAP</span
+              ><span class="fs-4 text-primary"> v3</span>
             </span>
           </a>
         </div>
@@ -77,7 +82,8 @@
                   data-action="dark_mode_toggle"
                   href="javascript:void(0)"
                 >
-                  <i class="fa fa-moon"></i>
+                  <i
+                    class="fa fa-moon"></i>
                 </a>
               </li>
               <!-- <li class="list-inline-item">

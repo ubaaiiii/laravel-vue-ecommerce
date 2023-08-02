@@ -77,8 +77,8 @@
 <script setup>
 import { ref, onMounted, inject } from "vue";
 import GuestLayout from "@/components/layouts/GuestLayout.vue";
-import store from "../../store";
-import router from "../../router";
+import store from "@/store";
+import router from "@/router";
 
 let loading = ref(false);
 let error = ref(null);
