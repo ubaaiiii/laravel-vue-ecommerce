@@ -40,8 +40,8 @@ export function logout({ commit }) {
 }
 
 // ############################ PRODUCTS ###########################
-export function getProducts({ commit }) {
-  return axiosClient.get("/products")
+export function getProducts({ commit }, data) {
+  return axiosClient.get("/products", data)
     .then(({ data }) => {
       commit('setProducts', data);
       return data;
