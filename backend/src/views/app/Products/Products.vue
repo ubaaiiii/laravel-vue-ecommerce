@@ -123,18 +123,19 @@
           <!-- END Search -->
         </div>
         <!-- <ProductsTable /> -->
-        <vue-good-table
-          :columns="columns"
-          :rows="rows"
-          mode="remote"
-          :pagination-options="{
-            enabled: true,
-          }"
-        >
-          <div slot="emptystate">
-            This will show up when there are no rows
-          </div></vue-good-table
-        >
+        <div class="block-content block-content-full">
+          <DataTable
+            :data="data"
+            class="table table-bordered table-vcenter js-dataTable-responsive table-hover"
+          >
+            <thead>
+              <tr>
+                <th>A</th>
+                <th>B</th>
+              </tr>
+            </thead>
+          </DataTable>
+        </div>
         <ProductsModal
           v-model="showProductModal"
           :product="productModel"
@@ -151,7 +152,12 @@
 import { onMounted, ref } from "vue";
 import ProductsTable from "./ProductsTable.vue";
 import ProductsModal from "./ProductsModal.vue";
-import { VueGoodTable } from "vue-good-table-next";
+import DataTable from "datatables.net-vue3";
+import DataTablesCore from "datatables.net";
+
+DataTable.use(DataTablesCore);
+
+const data = ref([]);
 
 const columns = [
   {
@@ -192,19 +198,6 @@ const rows = ref([
   // { id: 5, name: 'Dan', age: 40, createdAt: '2011-10-21', score: 0.03343 },
   // { id: 6, name: 'John', age: 20, createdAt: '2011-10-31', score: 0.03343 },
 ]);
-
-// const DEFAULT_PRODUCT = {
-//   id: '',
-//   title: '',
-//   description: '',
-//   price: '',
-//   quantity: '',
-//   image: '',
-//   category: '',
-//   status: '',
-//   created_at: '',
-//   updated_at: '',
-// }
 </script>
 
 <style scoped>
