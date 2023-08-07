@@ -7,7 +7,7 @@
         class="content-heading d-flex justify-content-between align-items-center"
       >
         <span>
-          Products <small>({{ total_products }})</small>
+          Products
         </span>
         <div class="space-x-1">
           <!-- <div class="dropdown d-inline-block">
@@ -92,8 +92,7 @@
         </div>
       </div>
       <div class="block block-rounded">
-        <div class="block-content bg-body-light">
-          <!-- Search -->
+        <!-- <div class="block-content bg-body-light">
           <form
             action="be_pages_ecom_products.html"
             method="POST"
@@ -120,20 +119,16 @@
               </div>
             </div>
           </form>
-          <!-- END Search -->
-        </div>
+        </div> -->
         <!-- <ProductsTable /> -->
         <div class="block-content block-content-full">
           <DataTable
-            :data="data"
-            class="table table-bordered table-vcenter js-dataTable-responsive table-hover"
+            :options="options"
+            :columns="columns"
+            :ajax="url"
+            :createdRow="createdRow"
+            class="display nowrap"
           >
-            <thead>
-              <tr>
-                <th>A</th>
-                <th>B</th>
-              </tr>
-            </thead>
           </DataTable>
         </div>
         <ProductsModal
@@ -149,55 +144,145 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, inject } from "vue";
 import ProductsTable from "./ProductsTable.vue";
+import store from "@/store";
 import ProductsModal from "./ProductsModal.vue";
 import DataTable from "datatables.net-vue3";
-import DataTablesCore from "datatables.net";
+import DataTablesLib from "datatables.net-dt";
+import "datatables.net-select";
+import "datatables.net-responsive";
+import "datatables.net-buttons";
+import "datatables.net-scroller";
+import "datatables.net-buttons/js/buttons.html5";
+import jszip from "jszip";
+import pdfmake from "pdfmake";
 
-DataTable.use(DataTablesCore);
+DataTable.use(DataTablesLib);
+// DataTable.use(Buttons);
+DataTablesLib.Buttons.jszip(jszip);
+DataTablesLib.Buttons.pdfMake(pdfmake);
 
+let apiBaseUrl = inject("apiBaseUrl");
+let url = apiBaseUrl + "/api/products";
 const data = ref([]);
-
 const columns = [
   {
-    label: "Id",
-    field: "id",
+    data: "id",
+    title: "ID",
   },
   {
-    label: "Title",
-    field: "title",
+    data: "title",
+    title: "Title",
+  },
+  // {
+  //   data: "slug",
+  //   title: "Slug",
+  // },
+  {
+    data: "image",
+    title: "Image",
+  },
+  // {
+  //   data: "image_mime",
+  //   title: "Image Mime",
+  // },
+  // {
+  //   data: "image_size",
+  //   title: "Image Size",
+  // },
+  {
+    data: "description",
+    title: "Description",
   },
   {
-    label: "Image",
-    field: "image_url",
+    data: "price",
+    title: "Price",
   },
+  // {
+  //   data: "created_by",
+  //   title: "Created By",
+  // },
+  // {
+  //   data: "updated_by",
+  //   title: "Updated By",
+  // },
+  // {
+  //   data: "deleted_at",
+  //   title: "Deleted At",
+  // },
+  // {
+  //   data: "deleted_by",
+  //   title: "Deleted By",
+  // },
+  // {
+  //   data: "created_at",
+  //   title: "Created At",
+  // },
   {
-    label: "Price",
-    field: "price",
-  },
-  {
-    label: "Updated On",
-    field: "updated_at",
-    type: "date",
-    dateInputFormat: "yyyy-mm-dd hh:mm:ss",
-    dateOutputFormat: "D MMM YYYY",
-  },
-  {
-    label: "Actions",
-    field: "actions",
-    sortable: false,
+    data: "updated_at",
+    title: "Updated At",
   },
 ];
+const options = {
+  // responsive: true,
+  processing: true,
+  serverSide: true,
+  scrollX: true,
+  scrollY: 500,
+  // ordering: false,
+  scroller: {
+    loadingIndicator: true,
+  },
+  deferRender: true,
+  select: true,
+  dom: "Brift",
+  buttons: [
+    {
+      text: "<i class='fa fa-add'></i> New",
+      attr: {
+        "data-bs-toggle": "modal",
+        "data-bs-target": "#modal-tabs-alternative",
+       },
+      className: "btn btn-sm btn-alt-primary mb-3",
+    },
+    {
+      extend: "copy",
+      text: "<i class='fa fa-copy'></i> Copy",
+      attr: { "data-toggle": "click-ripple" },
+      className: "btn btn-sm btn-alt-primary mb-3",
+    },
+    {
+      extend: "csv",
+      text: "<i class='fa fa-download'></i> Csv",
+      attr: { "data-toggle": "click-ripple" },
+      className: "btn btn-sm btn-alt-primary mb-3",
+    },
+    {
+      extend: "excel",
+      text: "<i class='fa fa-download'></i> Excel",
+      attr: { "data-toggle": "click-ripple" },
+      className: "btn btn-sm btn-alt-primary mb-3",
+    },
+    // {extend: 'pdf', text: ' PDF', attr: {'data-toggle':'click-ripple'}, className: 'btn btn-sm btn-alt-primary mb-3 fa fa-download'},
+    // {extend: 'print', text: ' Print', attr: {'data-toggle':'click-ripple'}, className: 'btn btn-sm btn-alt-primary fa fa-print'}
+  ],
+  // pagingType: "bootstrap_input",
+};
 
-const rows = ref([
-  // { id: 1, name: 'John', age: 20, createdAt: '2011-10-31', score: 0.03343 },
-  // { id: 2, name: 'Jane', age: 24, createdAt: '2011-10-31', score: 0.03343 },
-  // { id: 3, name: 'Susan', age: 16, createdAt: '2011-10-30', score: 0.03343 },
-  // { id: 4, name: 'Chris', age: 55, createdAt: '2011-10-11', score: 0.03343 },
-  // { id: 5, name: 'Dan', age: 40, createdAt: '2011-10-21', score: 0.03343 },
-  // { id: 6, name: 'John', age: 20, createdAt: '2011-10-31', score: 0.03343 },
-]);
+function createdRow(row, data, dataIndex) {
+  console.log("created");
+}
+
+// store
+//   .dispatch("getProducts")
+//   .then(() => {
+//     data.value = store.state.products.data;
+//     console.log("data", data.value);
+//   })
+//   .catch((err) => {
+//     console.log("err", err);
+//   });
 </script>
 
 <style scoped>

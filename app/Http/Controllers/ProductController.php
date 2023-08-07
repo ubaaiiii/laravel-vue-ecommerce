@@ -8,8 +8,11 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -20,17 +23,17 @@ class ProductController extends Controller
    */
   public function index()
   {
-    $perPage = request('per_page', 10);
-    $search = request('search', '');
-    $sortField = request('sort_field', 'updated_at');
-    $sortDirection = request('sort_direction', 'desc');
-
     $query = Product::query()
-      ->where('title', 'like', "%{$search}%")
-      ->orderBy($sortField, $sortDirection)
-      ->paginate($perPage);
+      ->select([
+        'id',
+        'title',
+        'description',
+        'image',
+        'price',
+        'updated_at',
+      ]);
 
-    return ProductListResource::collection($query);
+    return DataTables::of($query)->toJson();
   }
 
   /**
