@@ -2,6 +2,7 @@
 import { ref, onMounted, inject } from "vue";
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import InputError from '@/Components/InputError.vue';
 // import store from "@/store";
 // import router from "@/router";
 
@@ -38,7 +39,7 @@ function initValidationSignIn() {
   Codebase.helpers("jq-validation");
   jQuery(".js-validation").validate({
     rules: {
-      "login-username": {
+      "login-email": {
         required: true,
         minlength: 3,
       },
@@ -48,9 +49,9 @@ function initValidationSignIn() {
       },
     },
     messages: {
-      "login-username": {
-        required: "Please enter a username",
-        minlength: "Your username must consist of at least 3 characters",
+      "login-email": {
+        required: "Please enter an email",
+        minlength: "Your email must consist of at least 3 characters",
       },
       "login-password": {
         required: "Please provide a password",
@@ -87,6 +88,7 @@ onMounted(() => {
     subtitle="It’s a great day today!"
     @submit="login"
   >
+  <Head title="Login" />
     <div class="block block-themed block-rounded block-fx-shadow">
       <div class="block-header bg-gd-dusk">
         <h3 class="block-title">Please Sign In</h3>
@@ -105,6 +107,7 @@ onMounted(() => {
             v-model="form.email"
           />
           <label class="form-label" for="login-email">Email</label>
+          <InputError class="mt-2" :message="form.errors.email" />
         </div>
         <div class="form-floating mb-4">
           <input

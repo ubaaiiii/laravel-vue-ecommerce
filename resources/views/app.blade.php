@@ -12,7 +12,7 @@
 
   <!-- Open Graph Meta -->
   <meta property="og:title" content="Sistem Informasi Asuransi Perbankan - v3">
-  <meta property="og:site_name" content="SIAP">
+  <meta property="og:site_name" content="SIAPv3">
   <meta property="og:description" content="Sistem Informasi Asuransi Perbankan - v3">
   <meta property="og:type" content="website">
   <meta property="og:url" content="siaplaku.id">
@@ -58,7 +58,13 @@
 </head>
 
 <body>
-  @inertia
+  @if (Auth::check())
+  <div id="page-container" class="remember-theme sidebar-o enable-page-overlay side-scroll page-header-modern">
+    @else
+    <div id="page-container" class="main-content-boxed">
+      @endif
+      @inertia
+    </div>
 </body>
 
 </html>

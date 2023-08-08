@@ -7,8 +7,7 @@ const laravelUrl = "{{ url('/') }}"; // Menyisipkan URL Laravel dari Blade templ
 </script>
 
 <template>
-  <div id="page-container" class="main-content-boxed">
-    <!-- Main Container -->
+  <!-- Main Container -->
     <main id="main-container">
       <!-- Page Content -->
       <div class="bg-body-dark">
@@ -44,5 +43,4 @@ const laravelUrl = "{{ url('/') }}"; // Menyisipkan URL Laravel dari Blade templ
       <!-- END Page Content -->
     </main>
     <!-- END Main Container -->
-  </div>
 </template>
