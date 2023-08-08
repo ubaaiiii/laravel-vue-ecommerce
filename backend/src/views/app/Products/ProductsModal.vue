@@ -1,13 +1,13 @@
 <template>
   <div
-    class="modal"
+    class="modal fade"
     id="modal-tabs-alternative"
     tabindex="-1"
     role="dialog"
     aria-labelledby="modal-tabs-alternative"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
       <div class="modal-content">
         <!-- Block Tabs Alternative Style -->
         <div class="block block-rounded shadow-none mb-0">

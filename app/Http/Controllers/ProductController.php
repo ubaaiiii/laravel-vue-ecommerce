@@ -140,7 +140,11 @@ class ProductController extends Controller
   {
     $path = 'images/' . Str::random();
     if (!Storage::exists($path)) {
+      Storage::makeDirectory($path, 0755, true);
+    }
 
+    if (!Storage::purFileAS("public/$path", $image, $image->getClientOriginalName())) {
+      throw new \Exception("Failed to save file \"{$image->getClientOriginalName()}\"");
     }
   }
 }

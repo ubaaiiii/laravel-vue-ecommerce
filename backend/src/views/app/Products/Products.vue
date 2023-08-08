@@ -6,9 +6,7 @@
       <div
         class="content-heading d-flex justify-content-between align-items-center"
       >
-        <span>
-          Products
-        </span>
+        <span> Products </span>
         <div class="space-x-1">
           <!-- <div class="dropdown d-inline-block">
             <button
@@ -155,6 +153,7 @@ import "datatables.net-responsive";
 import "datatables.net-buttons";
 import "datatables.net-scroller";
 import "datatables.net-buttons/js/buttons.html5";
+// import "datatables.net-plugins/pagination/input.js";
 import jszip from "jszip";
 import pdfmake from "pdfmake";
 
@@ -229,21 +228,22 @@ const options = {
   processing: true,
   serverSide: true,
   scrollX: true,
-  scrollY: 500,
+  // scrollY: 500,
   // ordering: false,
-  scroller: {
-    loadingIndicator: true,
-  },
+  // scroller: {
+  //   loadingIndicator: true,
+  // },
   deferRender: true,
   select: true,
-  dom: "Brift",
+  dom: "Blfrtip",
+  // pagingType: "input",
   buttons: [
     {
       text: "<i class='fa fa-add'></i> New",
       attr: {
         "data-bs-toggle": "modal",
         "data-bs-target": "#modal-tabs-alternative",
-       },
+      },
       className: "btn btn-sm btn-alt-primary mb-3",
     },
     {
