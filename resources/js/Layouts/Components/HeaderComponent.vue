@@ -2,6 +2,7 @@
 import { ref, onMounted, inject } from "vue";
 import { Link, Head, useForm } from "@inertiajs/vue3";
 
+const userDataRef = ref(userData);
 </script>
 
 <template>
@@ -157,7 +158,7 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
             aria-expanded="false"
           >
             <i class="fa fa-user d-sm-none"></i>
-            <span class="d-none d-sm-inline-block fw-semibold">John Doe</span>
+            <span class="d-none d-sm-inline-block fw-semibold">{{ userDataRef.name }}</span>
             <i class="fa fa-angle-down opacity-50 ms-1"></i>
           </button>
           <div
@@ -165,7 +166,7 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
             aria-labelledby="page-header-user-dropdown"
           >
             <div class="px-2 py-3 bg-body-light rounded-top">
-              <h5 class="h6 text-center mb-0">John Doe</h5>
+              <h5 class="h6 text-center mb-0">{{ userDataRef.name }}</h5>
             </div>
             <div class="p-2">
               <a

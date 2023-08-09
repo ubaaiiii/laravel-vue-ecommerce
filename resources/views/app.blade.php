@@ -32,24 +32,12 @@
   <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
   <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
   <!-- END Stylesheets -->
-</head>
-
-<body>
-  {{-- @if (Auth::check())
-
-  @else
-
-  @endif --}}
-  <div id="page-container" class="main-content-boxed side-trans-enabled sidebar-o">
-  @inertia
-  </div>
-
   <!--
-      Codebase JS
+        Codebase JS
 
-      Core libraries and functionality
-      webpack is putting everything together at assets/_js/main/app.js
-  -->
+        Core libraries and functionality
+        webpack is putting everything together at assets/_js/main/app.js
+    -->
   <!-- <script src="assets/js/codebase.app.min.js"></script> -->
   <script src="assets/js/codebase.app.min.js"></script>
 
@@ -67,6 +55,18 @@
   @routes
   @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
   @inertiaHead
+</head>
+
+<body>
+  <div id="page-container"
+    class="main-content-boxed {{ Auth::check() ? 'page-header-fixed page-header-glass side-trans-enabled sidebar-o' : '' }} {{ Auth::user()->is_dark ? 'sidebar-dark page-header-dark dark-mode' : '' }}">
+    @inertia
+  </div>
+
+
+  <script setup>
+    const userData = {!! json_encode(Auth::user()) !!};
+  </script>
 </body>
 
 </html>

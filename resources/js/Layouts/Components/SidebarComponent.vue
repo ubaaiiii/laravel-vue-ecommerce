@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { Link, Head, useForm } from "@inertiajs/vue3";
-// import store from "store/index.js";
 
-// const user = JSON.parse(sessionStorage.getItem('USER'));
+const userDataRef = ref(userData);
 </script>
 
 <template>
@@ -61,7 +60,7 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
           <div class="smini-visible-block animated fadeIn px-3">
             <img
               class="img-avatar img-avatar32"
-              src="assets/media/avatars/avatar15.jpg"
+              :src="`assets/media/avatars/${userDataRef.photo}`"
               alt=""
             />
           </div>
@@ -72,14 +71,14 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
             <div class="img-link">
               <img
                 class="img-avatar"
-                src="assets/media/avatars/avatar15.jpg"
+                :src="`assets/media/avatars/${userDataRef.photo}`"
                 alt=""
               />
             </div>
             <ul class="list-inline mt-3 mb-0">
               <li class="list-inline-item">
                 <div class="link-fx text-dual fs-sm fw-semibold text-uppercase">
-                  John Doe
+                  {{ userDataRef.name }}
                 </div>
               </li>
               <li class="list-inline-item">
@@ -109,32 +108,28 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
         <div class="content-side content-side-full">
           <ul class="nav-main">
             <li class="nav-main-item">
-              <router-link class="nav-main-link active"
-              to="/app/dashboard">
+              <Link :class="{active: route().current('dashboard')}" class="nav-main-link" :href="route('dashboard')">
                 <i class="nav-main-link-icon fa fa-house-user"></i>
                 <span class="nav-main-link-name">Dashboard</span>
-              </router-link>
+              </Link>
             </li>
             <li class="nav-main-item">
-              <router-link class="nav-main-link active"
-              to="/app/products">
+              <Link :class="{active: route().current('products')}" class="nav-main-link" :href="route('products')">
                 <i class="nav-main-link-icon fa fa-list"></i>
                 <span class="nav-main-link-name">Products</span>
-              </router-link>
+              </Link>
             </li>
             <li class="nav-main-item">
-              <router-link class="nav-main-link active"
-              to="/app/users">
+              <Link :class="{active: route().current('users')}" class="nav-main-link" :href="route('users')">
                 <i class="nav-main-link-icon fa fa-users"></i>
                 <span class="nav-main-link-name">Users</span>
-              </router-link>
+              </Link>
             </li>
             <li class="nav-main-item">
-              <router-link class="nav-main-link active"
-              to="/app/reports">
+              <Link :class="{active: route().current('reports')}" class="nav-main-link" :href="route('reports')">
                 <i class="nav-main-link-icon fa fa-chart-simple"></i>
                 <span class="nav-main-link-name">Report</span>
-              </router-link>
+              </Link>
             </li>
           </ul>
         </div>
