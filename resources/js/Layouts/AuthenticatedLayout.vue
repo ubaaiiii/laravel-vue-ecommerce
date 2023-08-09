@@ -2,6 +2,19 @@
 import SidebarComponent from "@/Layouts/Components/SidebarComponent.vue";
 import HeaderComponent from "@/Layouts/Components/HeaderComponent.vue";
 import FooterComponent from "@/Layouts/Components/FooterComponent.vue";
+import { onMounted  } from 'vue';
+// import Inertia from '@inertiajs/vue3';
+
+const props = defineProps({
+  layoutClass: "remember-theme sidebar-o enable-page-overlay side-scroll page-header-modern", // Sesuaikan dengan tipe data yang sesuai
+});
+
+// onMounted(() => {
+//   // Menggunakan Inertia untuk mengirim layoutClass ke Blade
+//   Inertia.onVisit((visit) => {
+//     Inertia.setPage({ layoutClass: "remember-theme sidebar-o enable-page-overlay side-scroll page-header-modern" });
+//   });
+// });
 </script>
 
 <template>

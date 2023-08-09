@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { Link, Head, useForm } from "@inertiajs/vue3";
-// import store from "@/store/index.js";
+// import store from "store/index.js";
 
 // const user = JSON.parse(sessionStorage.getItem('USER'));
 </script>
@@ -25,7 +25,7 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
               <!-- <i class="fa fa-fire text-primary"></i> -->
               <img
               class="mb-1" width="20%"
-              src="@/assets/media/favicons/favicon.png"
+              src="assets/media/favicons/favicon.png"
               alt=""
               />
               <span class="fs-4 text-dual"> SIAP</span
@@ -61,7 +61,7 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
           <div class="smini-visible-block animated fadeIn px-3">
             <img
               class="img-avatar img-avatar32"
-              src="@/assets/media/avatars/avatar15.jpg"
+              src="assets/media/avatars/avatar15.jpg"
               alt=""
             />
           </div>
@@ -72,7 +72,7 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
             <div class="img-link">
               <img
                 class="img-avatar"
-                src="@/assets/media/avatars/avatar15.jpg"
+                src="assets/media/avatars/avatar15.jpg"
                 alt=""
               />
             </div>
