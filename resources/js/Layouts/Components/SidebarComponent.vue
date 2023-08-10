@@ -1,8 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 import { Link, Head, useForm } from "@inertiajs/vue3";
 
-const userDataRef = ref(userData);
+const props = defineProps({
+  auth: Object,
+});
 </script>
 
 <template>
@@ -60,7 +62,7 @@ const userDataRef = ref(userData);
           <div class="smini-visible-block animated fadeIn px-3">
             <img
               class="img-avatar img-avatar32"
-              :src="`assets/media/avatars/${userDataRef.photo}`"
+              :src="`assets/media/avatars/${auth.user.photo}`"
               alt=""
             />
           </div>
@@ -71,14 +73,14 @@ const userDataRef = ref(userData);
             <div class="img-link">
               <img
                 class="img-avatar"
-                :src="`assets/media/avatars/${userDataRef.photo}`"
+                :src="`assets/media/avatars/${auth.user.photo}`"
                 alt=""
               />
             </div>
             <ul class="list-inline mt-3 mb-0">
               <li class="list-inline-item">
                 <div class="link-fx text-dual fs-sm fw-semibold text-uppercase">
-                  {{ userDataRef.name }}
+                  {{ auth.user.name }}
                 </div>
               </li>
               <li class="list-inline-item">

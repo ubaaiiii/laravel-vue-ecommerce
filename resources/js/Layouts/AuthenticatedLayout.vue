@@ -2,15 +2,14 @@
 import SidebarComponent from "@/Layouts/Components/SidebarComponent.vue";
 import HeaderComponent from "@/Layouts/Components/HeaderComponent.vue";
 import FooterComponent from "@/Layouts/Components/FooterComponent.vue";
-import { onMounted  } from 'vue';
-// import Inertia from '@inertiajs/vue3';
+import { onMounted, ref  } from 'vue';
 
-// onMounted(() => {
-//   // Menggunakan Inertia untuk mengirim layoutClass ke Blade
-//   Inertia.onVisit((visit) => {
-//     Inertia.setPage({ layoutClass: "remember-theme sidebar-o enable-page-overlay side-scroll page-header-modern" });
-//   });
-// });
+const appData = ref(JSON.parse(document.getElementById('app').getAttribute('data-page')));
+const { props } = appData.value;
+
+onMounted(() => {
+  Codebase._uiInit()
+});
 </script>
 
 <template>
@@ -27,20 +26,21 @@ import { onMounted  } from 'vue';
         Adding .smini-visible to an element will show it only when the sidebar is in mini mode
         Adding 'smini-visible-block' to an element will show it (display: block) only when the sidebar is in mini mode
       -->
-    <SidebarComponent />
+    <SidebarComponent v-bind="props" />
     <!-- END Sidebar -->
 
     <!-- Header -->
-    <HeaderComponent />
+    <HeaderComponent v-bind="props" />
     <!-- END Header -->
 
     <!-- Main Container -->
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
     <slot></slot>
     <!-- END Main Container -->
 
     <!-- Footer -->
-    <FooterComponent />
+    <FooterComponent v-bind="props" />
     <!-- END Footer -->
+
   </div>
 </template>
