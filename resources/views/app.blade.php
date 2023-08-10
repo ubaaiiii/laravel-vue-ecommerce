@@ -27,7 +27,7 @@
 
   <!-- Stylesheets -->
   <!-- Codebase framework -->
-  <link rel="stylesheet" id="css-main" href="assets/css/codebase.min.css">
+  {{-- <link rel="stylesheet" id="css-main" href="assets/css/codebase.min.css"> --}}
 
   <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
   <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
@@ -39,15 +39,14 @@
         webpack is putting everything together at assets/_js/main/app.js
     -->
   <!-- <script src="assets/js/codebase.app.min.js"></script> -->
-  <script src="assets/js/codebase.app.min.js"></script>
 
   <!-- jQuery (required for Select2 + jQuery Validation plugins) -->
-  <script src="assets/js/lib/jquery.min.js"></script>
+  {{-- <script src="assets/js/lib/jquery.min.js"></script> --}}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 
   <!-- Page JS Plugins -->
-  <script src="assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+  {{-- <script src="assets/js/plugins/jquery-validation/jquery.validate.min.js"></script> --}}
 
   {{-- <script type="module" src="main.js"></script> --}}
 
@@ -59,8 +58,8 @@
 
 <body>
   <div id="page-container"
-    class="main-content-boxed {{ Auth::check() ? 'page-header-fixed page-header-glass side-trans-enabled sidebar-o' : '' }} {{ Auth::user()->is_dark ? 'sidebar-dark page-header-dark dark-mode' : '' }}">
-    @inertia
+  class="main-content-boxed {{ Auth::check() ? 'page-header-fixed page-header-glass side-trans-enabled sidebar-o' : '' }} {{ Auth::check() && Auth::user()->is_dark ? 'sidebar-dark page-header-dark dark-mode' : '' }}">
+  @inertia
   </div>
 
 

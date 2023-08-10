@@ -1,5 +1,10 @@
 import './bootstrap';
 import '../css/app.css';
+import '../assets/css/codebase.min.css';
+
+import '../assets/js/codebase.app.min.js';
+import '../assets/js/lib/jquery.min.js';
+import '../assets/js/plugins/jquery-validation/jquery.validate.min.js';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -14,10 +19,11 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
+      const vueApp = createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue, Ziggy)
-            .mount(el);
+            .use(ZiggyVue, Ziggy);
+
+      vueApp.mount("#page-container");
     },
     progress: {
         color: '#4B5563',
