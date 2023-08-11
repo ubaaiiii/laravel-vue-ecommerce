@@ -58,7 +58,7 @@
 
 <body>
   <div id="page-container"
-  class="main-content-boxed {{ Auth::check() ? 'page-header-fixed page-header-glass side-trans-enabled sidebar-o' : '' }} {{ Auth::check() && Auth::user()->is_dark ? 'sidebar-dark page-header-dark dark-mode' : '' }}">
+  class="{{ Auth::check() ? 'side-scroll page-header-fixed page-header-glass side-trans-enabled sidebar-o' : '' }} {{ Auth::check() && Auth::user()->is_dark ? 'sidebar-dark page-header-dark dark-mode' : '' }} main-content-boxed">
   @inertia
   </div>
 </body>

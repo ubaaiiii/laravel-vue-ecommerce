@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
 import { Link, Head, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({

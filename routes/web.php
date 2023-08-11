@@ -30,7 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
   })->name('dashboard');
 
   Route::get('/products', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Products/Index');
   })->name('products');
 
   Route::get('/users', function () {

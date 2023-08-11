@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
 import { Link, Head, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -160,7 +160,7 @@ const props = defineProps({
             aria-expanded="false"
           >
             <i class="fa fa-user d-sm-none"></i>
-            <span class="d-none d-sm-inline-block fw-semibold">John Doe</span>
+            <span class="d-none d-sm-inline-block fw-semibold text-capitalize">{{ auth.user.name }}</span>
             <i class="fa fa-angle-down opacity-50 ms-1"></i>
           </button>
           <div
@@ -168,7 +168,7 @@ const props = defineProps({
             aria-labelledby="page-header-user-dropdown"
           >
             <div class="px-2 py-3 bg-body-light rounded-top">
-              <h5 class="h6 text-center mb-0">John Doe</h5>
+              <h5 class="h6 text-center mb-0 text-capitalize">{{ auth.user.level }}</h5>
             </div>
             <div class="p-2">
               <a
@@ -230,7 +230,7 @@ const props = defineProps({
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <i class="fa fa-flag"></i>
+            <i class="fa fa-bell"></i>
             <span class="text-primary">&bull;</span>
           </button>
           <div
@@ -326,14 +326,14 @@ const props = defineProps({
 
         <!-- Toggle Side Overlay -->
         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-        <button
+        <!-- <button
           type="button"
           class="btn btn-sm btn-alt-secondary"
           data-toggle="layout"
           data-action="side_overlay_toggle"
         >
           <i class="fa fa-fw fa-stream"></i>
-        </button>
+        </button> -->
         <!-- END Toggle Side Overlay -->
       </div>
       <!-- END Right Section -->
