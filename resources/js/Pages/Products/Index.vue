@@ -1,8 +1,9 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import { Head } from '@inertiajs/vue3';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 // import ProductsTable from "./Table.vue";
-// import store from "@/store";
+import store from "@/store";
 import ProductsModal from "./Modal.vue";
 import DataTable from "datatables.net-vue3";
 import DataTablesLib from "datatables.net-dt";
@@ -154,6 +155,14 @@ onMounted(() => {
         }
       });
     });
+
+  store.dispatch("getUser")
+    .then((response) => {
+      console.log("user:", response);
+    })
+    .catch((error) => {
+      console.log("user:", error);
+    });
 });
 </script>
 
@@ -162,7 +171,7 @@ onMounted(() => {
   <AuthenticatedLayout>
     <main id="main-container">
       <!-- Page Content -->
-      <div class="content mt-4">
+      <div class="content mt-5">
         <!-- Products -->
         <div class="block block-rounded">
           <div class="block-header block-header-default">

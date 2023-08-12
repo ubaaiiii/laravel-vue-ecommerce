@@ -14,40 +14,44 @@ use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    public function create(): Response
-    {
-        return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-        ]);
-    }
+  /**
+   * Display the login view.
+   */
+  public function create(): Response
+  {
+    return Inertia::render('Auth/Login', [
+      'canResetPassword' => Route::has('password.request'),
+      'status' => session('status'),
+    ]);
+  }
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request)
-    {
-        $request->authenticate();
+  /**
+   * Handle an incoming authentication request.
+   */
+  public function store(LoginRequest $request)
+  {
+    $request->authenticate();
 
-        $request->session()->regenerate();
+    $request->session()->regenerate();
 
-        return Inertia::location(RouteServiceProvider::HOME);
-    }
+    $user = Auth::user();
+    $token = $user->createToken('authToken')->plainTextToken;
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request)
-    {
-        Auth::guard('web')->logout();
+    return Inertia::location(RouteServiceProvider::HOME, ['token' => $token]);
+    // return Inertia::location(RouteServiceProvider::HOME);
+  }
 
-        $request->session()->invalidate();
+  /**
+   * Destroy an authenticated session.
+   */
+  public function destroy(Request $request)
+  {
+    Auth::guard('web')->logout();
 
-        $request->session()->regenerateToken();
+    $request->session()->invalidate();
 
-        return Inertia::location('/login');
-    }
+    $request->session()->regenerateToken();
+
+    return Inertia::location('/login');
+  }
 }

@@ -5,6 +5,16 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
 const props = defineProps({
   auth: Object,
 });
+const pageContainer = document.getElementById("page-container");
+
+function gantiMode() {
+  Codebase.layout("dark_mode_toggle");
+  setTimeout(() => {
+    const isDarkMode = pageContainer.classList.contains("dark-mode");
+    console.log('Is in dark mode:', isDarkMode);
+  }, 100);
+}
+
 </script>
 
 <template>
@@ -25,9 +35,10 @@ const props = defineProps({
             <span class="smini-hidden">
               <!-- <i class="fa fa-fire text-primary"></i> -->
               <img
-              class="mb-1" width="20%"
-              src="assets/media/favicons/favicon.png"
-              alt=""
+                class="mb-1"
+                width="20%"
+                src="assets/media/favicons/favicon.png"
+                alt=""
               />
               <span class="fs-4 text-dual"> SIAP</span
               ><span class="fs-4 text-primary"> v3</span>
@@ -87,12 +98,10 @@ const props = defineProps({
                 <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
                 <a
                   class="link-fx text-dual"
-                  data-toggle="layout"
-                  data-action="dark_mode_toggle"
-                  href="javascript:void(0)"
+                  style="cursor: pointer"
+                  @click="gantiMode"
                 >
-                  <i
-                    class="fa fa-moon"></i>
+                  <i class="fa fa-moon"></i>
                 </a>
               </li>
               <!-- <li class="list-inline-item">
@@ -110,25 +119,41 @@ const props = defineProps({
         <div class="content-side content-side-full">
           <ul class="nav-main">
             <li class="nav-main-item">
-              <Link :class="{active: route().current('dashboard')}" class="nav-main-link" :href="route('dashboard')">
+              <Link
+                :class="{ active: route().current('dashboard') }"
+                class="nav-main-link"
+                :href="route('dashboard')"
+              >
                 <i class="nav-main-link-icon fa fa-house-user"></i>
                 <span class="nav-main-link-name">Dashboard</span>
               </Link>
             </li>
             <li class="nav-main-item">
-              <Link :class="{active: route().current('products')}" class="nav-main-link" :href="route('products')">
+              <Link
+                :class="{ active: route().current('products') }"
+                class="nav-main-link"
+                :href="route('products')"
+              >
                 <i class="nav-main-link-icon fa fa-list"></i>
                 <span class="nav-main-link-name">Products</span>
               </Link>
             </li>
             <li class="nav-main-item">
-              <Link :class="{active: route().current('users')}" class="nav-main-link" :href="route('users')">
+              <Link
+                :class="{ active: route().current('users') }"
+                class="nav-main-link"
+                :href="route('users')"
+              >
                 <i class="nav-main-link-icon fa fa-users"></i>
                 <span class="nav-main-link-name">Users</span>
               </Link>
             </li>
             <li class="nav-main-item">
-              <Link :class="{active: route().current('reports')}" class="nav-main-link" :href="route('reports')">
+              <Link
+                :class="{ active: route().current('reports') }"
+                class="nav-main-link"
+                :href="route('reports')"
+              >
                 <i class="nav-main-link-icon fa fa-chart-simple"></i>
                 <span class="nav-main-link-name">Report</span>
               </Link>
