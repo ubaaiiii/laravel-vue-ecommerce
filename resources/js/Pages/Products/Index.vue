@@ -130,9 +130,9 @@ const options = {
 let dt;
 const table = ref();
 
-function createdRow(row, data, dataIndex) {
-  console.log("created");
-}
+// function createdRow(row, data, dataIndex) {
+//   console.log("created");
+// }
 
 onMounted(() => {
   dt = table.value.dt;
@@ -217,11 +217,76 @@ onMounted(() => {
             </div>
           </div>
           <div class="block-content block-content-full">
+            <div class="row">
+              <!-- Row #1 -->
+              <div class="col-6 col-md-4 col-xl-2">
+                <a class="block block-rounded text-center" href="javascript:void(0)">
+                  <div class="block-content ribbon ribbon-bookmark ribbon-glass ribbon-left bg-gd-dusk">
+                    <div class="ribbon-box">750</div>
+                    <p class="mt-2 mb-3">
+                      <i class="si si-book-open fa-2x text-white-75"></i>
+                    </p>
+                    <p class="fw-semibold text-white">Articles</p>
+                  </div>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xl-2">
+                <a class="block block-rounded text-center" href="javascript:void(0)">
+                  <div class="block-content bg-gd-primary">
+                    <p class="mt-2 mb-3">
+                      <i class="si si-plus fa-2x text-white-75"></i>
+                    </p>
+                    <p class="fw-semibold text-white">New Article</p>
+                  </div>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xl-2">
+                <a class="block block-rounded text-center" href="be_pages_forum_categories.html">
+                  <div class="block-content ribbon ribbon-bookmark ribbon-glass ribbon-left bg-gd-sea">
+                    <div class="ribbon-box">16</div>
+                    <p class="mt-2 mb-3">
+                      <i class="si si-bubbles fa-2x text-white-75"></i>
+                    </p>
+                    <p class="fw-semibold text-white">Comments</p>
+                  </div>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xl-2">
+                <a class="block block-rounded text-center" href="be_pages_generic_search.html">
+                  <div class="block-content bg-gd-lake">
+                    <p class="mt-2 mb-3">
+                      <i class="si si-magnifier fa-2x text-white-75"></i>
+                    </p>
+                    <p class="fw-semibold text-white">Search</p>
+                  </div>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xl-2">
+                <a class="block block-rounded text-center" href="be_comp_charts.html">
+                  <div class="block-content bg-gd-emerald">
+                    <p class="mt-2 mb-3">
+                      <i class="si si-bar-chart fa-2x text-white-75"></i>
+                    </p>
+                    <p class="fw-semibold text-white">Statistics</p>
+                  </div>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xl-2">
+                <a class="block block-rounded text-center" href="javascript:void(0)">
+                  <div class="block-content bg-gd-corporate">
+                    <p class="mt-2 mb-3">
+                      <i class="si si-settings fa-2x text-white-75"></i>
+                    </p>
+                    <p class="fw-semibold text-white">Settings</p>
+                  </div>
+                </a>
+              </div>
+              <!-- END Row #1 -->
+            </div>
             <DataTable
               :options="options"
               :columns="columns"
               ajax="/api/products"
-              :createdRow="createdRow"
               class="display nowrap table-nowrap"
               ref="table"
             >

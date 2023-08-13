@@ -50,6 +50,12 @@
 
   {{-- <script type="module" src="main.js"></script> --}}
 
+  <script>
+    @if (Auth::check())
+    window.token = "{{ Auth::user()->token }}";
+    @endif
+  </script>
+
   <!-- Scripts -->
   @routes
   @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])

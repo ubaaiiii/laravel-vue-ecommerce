@@ -35,9 +35,11 @@ class AuthenticatedSessionController extends Controller
     $request->session()->regenerate();
 
     $user = Auth::user();
-    $token = $user->createToken('authToken')->plainTextToken;
+    $token = $user->createToken('authToken', ['level:'.$user->level])->plainTextToken;
+    $user->token = $token;
+    $user->save();
 
-    return Inertia::location(RouteServiceProvider::HOME, ['token' => $token]);
+    return Inertia::location(RouteServiceProvider::HOME);
     // return Inertia::location(RouteServiceProvider::HOME);
   }
 

@@ -11,6 +11,16 @@ export function getUser() {
     })
 }
 
+export function darkMode(data) {
+  return axiosClient.post("/darkMode", data)
+    .then(({data}) => {
+      return data;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
 // ############################ PRODUCTS ###########################
 export function getProducts({ commit }, data) {
   return axiosClient.get("/products", data)

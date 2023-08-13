@@ -23,7 +23,7 @@ class ProductController extends Controller
    */
   public function index()
   {
-    $query = Product::query()
+    $products = Product::query()
       ->select([
         'id',
         'title',
@@ -31,9 +31,18 @@ class ProductController extends Controller
         'image',
         'price',
         'updated_at',
+        DB::raw('null as action')
       ]);
 
-    return DataTables::of($query)->toJson();
+    return DataTables::of($products)
+      ->addColumn('image', function ($products) {
+        $url = asset($products->image);
+        return '<img src="' . $url . '" border="0" width="40" class="img-rounded" align="center" />';
+      })->addColumn('action', function ($products) {
+        return '<a href="/admin/artist/' . $products->id . '/edit" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+    <a href="admin/artist/"' . $products->id . '" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+      })->rawColumns(['image', 'action'])->make(true);
+    // ->toJson();
   }
 
   /**

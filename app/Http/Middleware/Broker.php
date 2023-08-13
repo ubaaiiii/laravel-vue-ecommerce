@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Admin
+class Broker
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,12 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->is_admin == 1) {
+        if (Auth::user() && Auth::user()->level == "broker") {
           return $next($request);
         }
 
         return response([
-          'message' => 'You don\t have permission to perform this action'
+          'message' => 'You don\'t have permission to perform this action'
         ], 403);
     }
 }
